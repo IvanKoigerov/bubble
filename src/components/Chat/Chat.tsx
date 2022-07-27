@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactComponent as Smile } from './smile.svg';
 import send from './send.svg';
 import styled from 'styled-components';
+import Massage from './Massage';
 
 interface ChatProps {
   isOpen?: boolean;
@@ -25,7 +26,22 @@ const Chat = (props: ChatProps) => {
   return (
     <ChatWrapper className={props.isOpen ? 'show' : 'hide'}>
       <Masseges>
-        <div style={{ height: '1000px' }}></div>
+        <h1>Здравствуйте 👋</h1>
+        <p>
+          Если у Вас есть вопрос о порядке оформления документов или получения услуг, вы можете задать его здесь. "Мои
+          Документы" помогут найти нужную информацию.
+        </p>
+        <Massage author="Виртуальный оператор">
+          Я не совсем Вас понял. Уточните, пожалуйста, Ваш вопрос. При выборе кнопки Вы можете получить ответ на
+          популярные вопросы или задать другой вопрос, постараюсь помочь Вам быстрее.
+        </Massage>
+        <Massage isUser={true}>
+          Я не совсем Вас понял. Уточните, пожалуйста, Ваш вопрос. При выборе кнопки Вы можете получить ответ на
+          популярные вопросы или задать другой вопрос, постараюсь помочь Вам быстрее.
+        </Massage>
+        <Massage author="Бот">Здравствуйте, меня зовут бот. Уточните, пожалуйста, какой вопрос вас интересует?</Massage>
+        <Massage isUser={true}>памагите</Massage>
+        <Massage author="Бот">Здравствуйте, меня зовут бот. Уточните, пожалуйста, какой вопрос вас интересует?</Massage>
       </Masseges>
       <TextWrapper>
         <Smile fill="#9ea4ac" />
@@ -97,7 +113,20 @@ const TextArea = styled.textarea<{ scroll?: string }>`
 `;
 
 const Masseges = styled.div`
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: auto;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dadd;
+  }
 `;
 
 export default Chat;
