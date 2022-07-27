@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import check from './check.svg';
 import shut from './shut.svg';
 import bubble from './bubble.svg';
-import textLeft from './text-lef.svg';
+import textLeft from './text-left.svg';
 import textRight from './text-right.svg';
 
 interface BubbleProps {
