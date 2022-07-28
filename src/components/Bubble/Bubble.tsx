@@ -23,21 +23,24 @@ const BubbleWrapper = styled.button`
   border: none;
   border-radius: 100%;
   background: #0848c0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 10px #00000014;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   animation: view 0.3s ease;
+
   @keyframes view {
     0% {
       transform: translateY(100px);
     }
+
     100% {
       transform: translateY(0);
     }
   }
+
   &.open {
     @media screen and (max-width: 410px) {
       position: absolute;
@@ -45,8 +48,8 @@ const BubbleWrapper = styled.button`
       right: 10px;
       width: 40px;
       height: 40px;
-      background: rgba(51, 51, 51, 0.4);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+      background: #3334;
+      box-shadow: 0 0 10px #00000014;
     }
   }
 
@@ -60,6 +63,7 @@ const BabbleImg = styled.div`
   height: 30px;
   background: no-repeat center;
   position: relative;
+
   ::before {
     z-index: 100;
     content: '';
@@ -74,12 +78,13 @@ const BabbleImg = styled.div`
 
   &.open {
     background-image: url(${shut});
-    animation: openRotate 0.3s linear;
+    animation: open-rotate 0.3s linear;
   }
 
   &.close {
     background-image: url(${bubble});
-    animation: bubbleOpen 0.6s forwards, bubbleSecond 0.6s linear forwards 3.2s, bubbleEnd 0.6s linear forwards 5.2s;
+    animation: bubble-open 0.6s forwards, bubbleSecond 0.6s linear forwards 3.2s, bubbleEnd 0.6s linear forwards 5.2s;
+
     ::before {
       animation: textLeftShow 1.3s linear 2s, textRightShow 1.3s linear 3.9s, CheckShow 2s linear 5.8s;
     }
@@ -87,109 +92,124 @@ const BabbleImg = styled.div`
 
   &.start {
     background-image: url(${bubble});
-    animation: bubbleStart 0.6s forwards, bubbleSecond 0.6s linear forwards 3.3s, bubbleEnd 0.6s linear forwards 5.2s;
+    animation: bubble-start 0.6s forwards, bubble-second 0.6s linear forwards 3.3s, bubble-end 0.6s linear forwards 5.2s;
+
     ::before {
-      animation: textLeftShow 1.3s linear 2s, textRightShow 1.3s linear 3.9s, CheckShow 2s linear 5.8s;
+      animation: text-left-show 1.3s linear 2s, text-right-show 1.3s linear 3.9s, check-show 2s linear 5.8s;
     }
   }
 
-  @keyframes openRotate {
+  @keyframes open-rotate {
     0% {
       background-image: url(${shut});
       transform: rotate(0) scale(0);
     }
+
     100% {
       transform: rotate(-180deg) scale(1);
     }
   }
 
-  @keyframes bubbleOpen {
+  @keyframes bubble-open {
     0% {
       background-image: url(${shut});
       transform: rotate(-180deg) scale(1);
     }
+
     50% {
       background-image: url(${shut});
       transform: rotate(0) scale(0);
     }
+
     60% {
       background-image: url(${bubble});
       transform: translateY(20px) scale(1);
     }
+
     100% {
       transform: translateY(0);
     }
   }
 
-  @keyframes bubbleStart {
+  @keyframes bubble-start {
     0% {
       background-image: url(${bubble});
       transform: translateY(20px);
     }
+
     100% {
       transform: translateY(0);
     }
   }
 
-  @keyframes bubbleSecond {
+  @keyframes bubble-second {
     0% {
       transform: translateY(0);
     }
+
     35% {
       transform: translateY(-5px);
       opacity: 0;
     }
+
     70% {
       opacity: 0;
       transform: translateY(0) scaleX(-1);
     }
+
     100% {
       opacity: 1;
       transform: scaleX(-1);
     }
   }
 
-  @keyframes bubbleEnd {
+  @keyframes bubble-end {
     0% {
       transform: translateY(0) scaleX(-1);
     }
+
     35% {
       transform: translateY(-5px) scaleX(-1);
       opacity: 0;
     }
+
     70% {
       opacity: 0;
       transform: translateY(0) scaleX(1);
     }
+
     100% {
       opacity: 1;
       transform: scaleX(1);
     }
   }
 
-  @keyframes textLeftShow {
+  @keyframes text-left-show {
     0% {
       background-image: url(${textLeft});
       height: 0;
       opacity: 1;
     }
+
     70% {
       background-image: url(${textLeft});
       height: 100%;
       opacity: 1;
     }
+
     100% {
       background-image: url(${textLeft});
     }
   }
 
-  @keyframes textRightShow {
+  @keyframes text-right-show {
     0% {
       background-image: url(${textRight});
       height: 0;
       opacity: 1;
       transform: scaleX(-1);
     }
+
     100% {
       background-image: url(${textRight});
       height: 100%;
@@ -198,13 +218,15 @@ const BabbleImg = styled.div`
     }
   }
 
-  @keyframes CheckShow {
+  @keyframes check-show {
     30% {
       opacity: 1;
     }
+
     70% {
       opacity: 1;
     }
+
     100% {
       opacity: 0;
     }

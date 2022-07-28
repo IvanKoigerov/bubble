@@ -14,7 +14,7 @@ const Massage = (props: MassageProps) => {
       <MassageBox isUser={props.isUser}>
         <div>
           <Author>{props.author}</Author>
-          <p>{props.children}</p>
+          <p> {props.children} </p>
         </div>
         <Time>{date.getHours() + ':' + date.getMinutes()}</Time>
       </MassageBox>
@@ -37,11 +37,6 @@ const MassageBox = styled.div<{ isUser?: boolean }>`
   max-width: 80%;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 15px;
-  p {
-    margin-top: 0;
-    margin-bottom: 5px;
-  }
 `;
 
 const Author = styled.span`

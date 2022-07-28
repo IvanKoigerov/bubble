@@ -14,9 +14,12 @@ const AppWrapper = styled.div`
   background: #282c34;
   width: 100%;
   min-height: 100vh;
+  font-family: Roboto, sans-serif;
+
   *,
   *::before {
     box-sizing: border-box;
+    font-family: inherit;
   }
 `;
 
