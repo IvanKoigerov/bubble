@@ -111,9 +111,17 @@ const ChatWrapper = styled.div`
   &.hide {
     visibility: hidden;
   }
+
+  .item-enter {
+    opacity: 0;
+  }
+  .item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
 `;
 
-const TextWrapper = styled.div`
+const TextWrapper = styled.form`
   border: 1px solid #d6dade;
   border-radius: 2px;
   display: flex;
@@ -131,7 +139,7 @@ const TextWrapper = styled.div`
   }
 `;
 
-const TextArea = styled.textarea<{ scroll?: string }>`
+const TextArea = styled.textarea`
   width: 100%;
   min-height: 50px;
   max-height: 250px;

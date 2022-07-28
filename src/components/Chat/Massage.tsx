@@ -32,6 +32,19 @@ const Wrapper = styled.div<{ isUser?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: ${(props) => (props.isUser ? 'flex-end' : 'flex-start')};
+  animation: show 0.3s ease;
+
+  @keyframes show {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 const MassageBox = styled.div<{ isUser?: boolean }>`
