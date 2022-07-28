@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as Smile } from './smile.svg';
+import Smile from './Smile';
 import send from './send.svg';
 import styled from 'styled-components';
 import Massage from './Massage';
@@ -34,10 +34,12 @@ const Chat = (props: ChatProps) => {
         <Massage author="Виртуальный оператор">
           Я не совсем Вас понял. Уточните, пожалуйста, Ваш вопрос. При выборе кнопки Вы можете получить ответ на
           популярные вопросы или задать другой вопрос, постараюсь помочь Вам быстрее.
+          <a href="https://www.youtube.com/">youtube</a>
         </Massage>
         <Massage isUser={true}>
           Я не совсем Вас понял. Уточните, пожалуйста, Ваш вопрос. При выборе кнопки Вы можете получить ответ на
           популярные вопросы или задать другой вопрос, постараюсь помочь Вам быстрее.
+          <a href="https://www.youtube.com/">https://www.youtube.com/</a>
         </Massage>
         <Massage author="Бот">Здравствуйте, меня зовут бот. Уточните, пожалуйста, какой вопрос вас интересует?</Massage>
         <Massage isUser={true}>памагите</Massage>
@@ -53,10 +55,10 @@ const Chat = (props: ChatProps) => {
 };
 
 const ChatWrapper = styled.div`
-  box-shadow: 0 8px 16px rgba(51, 51, 51, 0.2);
+  box-shadow: 0 8px 16px #3333;
   border-radius: 4px;
   border-top: 5px solid #0848c0;
-  background: white;
+  background: #fff;
   padding: 16px;
   overflow: hidden;
   display: flex;
@@ -64,12 +66,14 @@ const ChatWrapper = styled.div`
   transition: 0.5s ease;
   opacity: 0;
   transform: translateY(-30px);
+
   @media screen and (min-width: 410px) {
     width: 400px;
     height: 760px;
     max-height: calc(95vh - 100px);
     margin-bottom: 20px;
   }
+
   @media screen and (max-width: 410px) {
     width: 100%;
     height: 100%;
@@ -90,14 +94,16 @@ const TextWrapper = styled.div`
   border-radius: 2px;
   display: flex;
   align-items: end;
+
   img,
   svg {
     margin: 15px 10px;
     width: 20px;
     flex-shrink: 0;
-    &:hover {
-      fill: #467bf1;
-    }
+  }
+
+  svg:hover {
+    fill: #467bf1;
   }
 `;
 
@@ -115,7 +121,16 @@ const TextArea = styled.textarea<{ scroll?: string }>`
 const Masseges = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+  gap: 16px;
   margin-top: auto;
+
+  * {
+    margin: 0;
+  }
+
   ::-webkit-scrollbar {
     width: 6px;
   }
