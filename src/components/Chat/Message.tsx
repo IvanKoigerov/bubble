@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export interface MassageProps {
+export interface MessageProps {
   author?: string;
   children: string;
   isUser?: boolean;
   time?: string;
 }
 
-const Massage = (props: MassageProps) => {
+const Message = (props: MessageProps) => {
   const massageText = (text: string) => {
     const urlRegex = /(\b(https|http):\/\/[-\w+&@#\/%?=~_|!:,.]*[-\w+&@#\/%=~_|])/gi;
     return text.replace(urlRegex, function (url) {
@@ -17,13 +17,13 @@ const Massage = (props: MassageProps) => {
   };
   return (
     <Wrapper isUser={props.isUser}>
-      <MassageBox isUser={props.isUser}>
+      <MessageBox isUser={props.isUser}>
         <div>
           <span>{props.author}</span>
           <p dangerouslySetInnerHTML={{ __html: massageText(props.children) }} />
         </div>
         <Time>{props.time}</Time>
-      </MassageBox>
+      </MessageBox>
     </Wrapper>
   );
 };
@@ -47,7 +47,7 @@ const Wrapper = styled.div<{ isUser?: boolean }>`
   }
 `;
 
-const MassageBox = styled.div<{ isUser?: boolean }>`
+const MessageBox = styled.div<{ isUser?: boolean }>`
   background: ${(props) => (props.isUser ? '#deecfd' : '#f3f5f7')};
   font-size: 14px;
   display: flex;
@@ -68,4 +68,4 @@ const Time = styled.time`
   font-size: 12px;
 `;
 
-export default Massage;
+export default Message;

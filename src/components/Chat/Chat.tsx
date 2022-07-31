@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Smile from './Smile';
 import send from './send.svg';
 import styled from 'styled-components';
-import Massage, { MassageProps } from './Massage';
+import Message, { MessageProps } from './Message';
 import { format } from 'date-fns';
 
 interface ChatProps {
@@ -12,9 +12,9 @@ interface ChatProps {
 const Chat = (props: ChatProps) => {
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
   const [value, setValue] = React.useState<string>();
-  const [massageArr, setMassageArr] = useState<MassageProps[]>([]);
+  const [massageArr, setMassageArr] = useState<MessageProps[]>([]);
 
-  const handleMassage = () => {
+  const handleMessage = () => {
     if (value) {
       setMassageArr((currentMassages) => {
         const newMassage = currentMassages.slice();
@@ -41,38 +41,38 @@ const Chat = (props: ChatProps) => {
 
   return (
     <ChatWrapper className={props.isOpen ? 'show' : 'hide'}>
-      <Masseges>
+      <Messeges>
         <h1>Здравствуйте 👋</h1>
         <p>
           Если у Вас есть вопрос о порядке оформления документов или получения услуг, вы можете задать его здесь. "Мои
           Документы" помогут найти нужную информацию.
         </p>
-        <Massage author="Виртуальный оператор" time="17:05">
+        <Message author="Виртуальный оператор" time="17:05">
           Я не совсем Вас понял. Уточните, пожалуйста, Ваш вопрос. При выборе кнопки Вы можете получить ответ на
           популярные вопросы или задать другой вопрос, постараюсь помочь Вам быстрее. https://www.youtube.com/
-        </Massage>
-        <Massage isUser={true} time="17:10">
+        </Message>
+        <Message isUser={true} time="17:10">
           Я не совсем Вас понял. Уточните, пожалуйста, Ваш вопрос. При выборе кнопки Вы можете получить ответ на
           популярные вопросы или задать другой вопрос, постараюсь помочь Вам быстрее. https://www.youtube.com/
-        </Massage>
-        <Massage author="Бот" time="17:15">
+        </Message>
+        <Message author="Бот" time="17:15">
           Здравствуйте, меня зовут бот. Уточните, пожалуйста, какой вопрос вас интересует?
-        </Massage>
-        <Massage isUser={true} time="17:20">
+        </Message>
+        <Message isUser={true} time="17:20">
           памагите
-        </Massage>
-        <Massage author="Бот" time="17:21">
+        </Message>
+        <Message author="Бот" time="17:21">
           Здравствуйте, меня зовут бот. Уточните, пожалуйста, какой вопрос вас интересует?
-        </Massage>
+        </Message>
         {massageArr &&
           massageArr.map((massage, key) => (
-            <Massage key={key} time={massage.time} isUser={true} children={massage.children} />
+            <Message key={key} time={massage.time} isUser={true} children={massage.children} />
           ))}
-      </Masseges>
+      </Messeges>
       <TextWrapper>
         <Smile fill="#9ea4ac" />
         <TextArea ref={textAreaRef} onChange={textAreaChange} placeholder="Введите сообщение..." value={value} />
-        {value && <img src={send} alt="send" onClick={handleMassage} />}
+        {value && <img src={send} alt="send" onClick={handleMessage} />}
       </TextWrapper>
     </ChatWrapper>
   );
@@ -150,7 +150,7 @@ const TextArea = styled.textarea`
   padding: 15px 0;
 `;
 
-const Masseges = styled.div`
+const Messeges = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
