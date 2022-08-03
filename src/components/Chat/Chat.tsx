@@ -178,7 +178,8 @@ const Messages = styled.div`
   gap: 16px;
   margin-top: auto;
 
-  * {
+  h1,
+  p {
     margin: 0;
   }
 
