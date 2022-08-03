@@ -1,26 +1,22 @@
 import React from 'react';
-import BubleBox from './components/BubleBox';
-import styled from 'styled-components';
+import BubbleBox from './components/BubbleBox';
+import styled, { ThemeProvider } from 'styled-components';
+import { mainTheme } from './GlobalStyle/GlobalStyle';
 
 function App() {
   return (
-    <AppWrapper>
-      <BubleBox />
-    </AppWrapper>
+    <ThemeProvider theme={mainTheme}>
+      <AppWrapper>
+        <BubbleBox />
+      </AppWrapper>
+    </ThemeProvider>
   );
 }
 
 const AppWrapper = styled.div`
-  background: #282c34;
+  background: ${(props) => props.theme.appColor};
   width: 100%;
   min-height: 100vh;
-  font-family: Roboto, sans-serif;
-
-  *,
-  *::before {
-    box-sizing: border-box;
-    font-family: inherit;
-  }
 `;
 
 export default App;
