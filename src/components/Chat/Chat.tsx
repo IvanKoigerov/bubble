@@ -105,14 +105,14 @@ const ChatWrapper = styled.div<{ isOpen?: boolean }>`
   visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
   transform: ${(props) => (props.isOpen ? 'translateY(0)' : 'translateY(-30px)')};
 
-  @media screen and (min-width: 410px) {
+  @media screen and (min-width: ${(props) => props.theme.mediaMobile}) {
     width: ${(props) => props.theme.chatW};
     height: ${(props) => props.theme.chatH};
     max-height: calc(95vh - 100px);
     margin-bottom: 20px;
   }
 
-  @media screen and (max-width: 410px) {
+  @media screen and (max-width: ${(props) => props.theme.mediaMobile}) {
     width: 100%;
     height: 100%;
   }

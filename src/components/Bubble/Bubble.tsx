@@ -45,7 +45,7 @@ const BubbleWrapper = styled.button<{ isOpen?: boolean }>`
     transform: scale(1.05);
   }
 
-  @media screen and (max-width: 410px) {
+  @media screen and (max-width: ${(props) => props.theme.mediaMobile}) {
     position: ${(props) => props.isOpen && 'absolute'};
     top: ${(props) => props.isOpen && '10px'};
     right: ${(props) => props.isOpen && '10px'};
@@ -54,7 +54,7 @@ const BubbleWrapper = styled.button<{ isOpen?: boolean }>`
     background: ${(props) => props.isOpen && props.theme.mobileCross};
   }
 
-  @media screen and (max-width: 410px) {
+  @media screen and (max-width: ${(props) => props.theme.mediaMobile}) {
     margin: 15px;
   }
 `;
