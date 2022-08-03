@@ -10,7 +10,7 @@ export interface MessageProps {
 
 const Message = (props: MessageProps) => {
   const massageText = (text: string) => {
-    const urlRegex = /(\b(https|http):\/\/[-\w+&@#\/%?=~_|!:,.]*[-\w+&@#\/%=~_|])/gi;
+    const urlRegex = /(\b(https|http):\/\/[-\w+&@#/%?=~_|!:,.]*[-\w+&@#/%=~_|])/gi;
     return text.replace(urlRegex, function (url) {
       return '<a href="' + url + '">' + url + '</a>';
     });
@@ -48,17 +48,17 @@ const Wrapper = styled.div<{ isUser?: boolean }>`
 `;
 
 const MessageBox = styled.div<{ isUser?: boolean }>`
-  background: ${(props) => (props.isUser ? '#deecfd' : '#f3f5f7')};
+  background: ${(props) => (props.isUser ? props.theme.userMessage : props.theme.message)};
   font-size: 14px;
   display: flex;
   gap: 5px;
   max-width: 80%;
   padding: 10px;
   border-radius: 8px;
-  color: #9ea4ac;
+  color: ${(props) => props.theme.common};
 
   p {
-    color: black;
+    color: ${(props) => props.theme.textColor};
     word-break: break-word;
   }
 `;

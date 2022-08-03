@@ -12,24 +12,29 @@ interface BubbleProps {
 }
 
 const Bubble = (props: BubbleProps) => (
-  <BubbleWrapper onClick={props.handleOpen} className={props.isOpen ? 'open' : 'close'}>
-    <BabbleImg className={props.isOpen !== undefined ? (props.isOpen ? 'open' : 'close') : 'start'} />
+  <BubbleWrapper onClick={props.handleOpen} isOpen={props.isOpen}>
+    <BubbleImg isOpen={props.isOpen} />
   </BubbleWrapper>
 );
 
-const BubbleWrapper = styled.button`
+const BubbleWrapper = styled.button<{ isOpen?: boolean }>`
   width: 60px;
   height: 60px;
   border: none;
   border-radius: 100%;
-  background: #0848c0;
-  box-shadow: 0 0 10px #00000014;
+  background: ${(props) => props.theme.primary};
+  box-shadow: ${(props) => props.theme.bubbleShadow};
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   animation: view 0.3s ease;
+  cursor: pointer;
+  transition: 0.1s linear;
+  &:hover {
+    transform: scale(1.05);
+  }
 
   @keyframes view {
     0% {
@@ -40,17 +45,13 @@ const BubbleWrapper = styled.button`
       transform: translateY(0);
     }
   }
-
-  &.open {
-    @media screen and (max-width: 410px) {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 40px;
-      height: 40px;
-      background: #3334;
-      box-shadow: 0 0 10px #00000014;
-    }
+  @media screen and (max-width: 410px) {
+    position: ${(props) => props.isOpen && 'absolute'};
+    top: ${(props) => props.isOpen && '10px'};
+    right: ${(props) => props.isOpen && '10px'};
+    width: ${(props) => props.isOpen && '40px'};
+    height: ${(props) => props.isOpen && '40px'};
+    background: ${(props) => props.isOpen && props.theme.mobileCross};
   }
 
   @media screen and (max-width: 410px) {
@@ -58,13 +59,18 @@ const BubbleWrapper = styled.button`
   }
 `;
 
-const BabbleImg = styled.div`
+const BubbleImg = styled.div<{ isOpen?: boolean }>`
   width: 30px;
   height: 30px;
-  background: no-repeat center;
+  background: ${(props) => (props.isOpen ? `url(${shut})` : `url(${bubble})`)} no-repeat center;
   position: relative;
-
-  ::before {
+  animation: ${(props) =>
+    props.isOpen !== undefined
+      ? props.isOpen
+        ? 'open-rotate 0.3s linear'
+        : 'bubble-open 0.6s forwards, bubbleSecond 0.6s linear forwards 3.2s, bubbleEnd 0.6s linear forwards 5.2s'
+      : 'bubble-start 0.6s forwards, bubble-second 0.6s linear forwards 3.3s, bubble-end 0.6s linear forwards 5.2s'};
+  &:before {
     z-index: 100;
     content: '';
     background: url(${check}) no-repeat;
@@ -74,29 +80,8 @@ const BabbleImg = styled.div`
     top: 5px;
     left: 5px;
     opacity: 0;
-  }
-
-  &.open {
-    background-image: url(${shut});
-    animation: open-rotate 0.3s linear;
-  }
-
-  &.close {
-    background-image: url(${bubble});
-    animation: bubble-open 0.6s forwards, bubbleSecond 0.6s linear forwards 3.2s, bubbleEnd 0.6s linear forwards 5.2s;
-
-    ::before {
-      animation: textLeftShow 1.3s linear 2s, textRightShow 1.3s linear 3.9s, CheckShow 2s linear 5.8s;
-    }
-  }
-
-  &.start {
-    background-image: url(${bubble});
-    animation: bubble-start 0.6s forwards, bubble-second 0.6s linear forwards 3.3s, bubble-end 0.6s linear forwards 5.2s;
-
-    ::before {
-      animation: text-left-show 1.3s linear 2s, text-right-show 1.3s linear 3.9s, check-show 2s linear 5.8s;
-    }
+    animation: ${(props) =>
+      props.isOpen ? '' : 'text-left-show 1.3s linear 2s, text-right-show 1.3s linear 3.9s, check-show 2s linear 5.8s'};
   }
 
   @keyframes open-rotate {

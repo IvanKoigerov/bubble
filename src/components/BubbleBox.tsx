@@ -4,7 +4,7 @@ import Bubble from './Bubble/Bubble';
 import Chat from './Chat/Chat';
 import '@fontsource/roboto';
 
-const BubleBox = () => {
+const BubbleBox = () => {
   const [isOpen, setIsOpen] = React.useState<boolean>();
 
   const handleOpen = () => {
@@ -43,4 +43,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default BubleBox;
+export default BubbleBox;
