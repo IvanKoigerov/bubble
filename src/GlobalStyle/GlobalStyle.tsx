@@ -23,6 +23,8 @@ export const mainTheme = {
   bubbleSize: '60px',
   bubbleOpenMobile: '40px',
   bubbleImgSize: '30px',
+
+  mediaMobile: '410px',
 };
 
 const GlobalStyle = createGlobalStyle`

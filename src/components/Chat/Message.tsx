@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export interface MessageProps {
   author?: string;
@@ -28,23 +28,23 @@ const Message = (props: MessageProps) => {
   );
 };
 
+const show = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const Wrapper = styled.div<{ isUser?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: ${(props) => (props.isUser ? 'flex-end' : 'flex-start')};
-  animation: show 0.3s ease;
-
-  @keyframes show {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  animation: ${show} 0.3s ease;
 `;
 
 const MessageBox = styled.div<{ isUser?: boolean }>`
