@@ -18,17 +18,17 @@ const Bubble = (props: BubbleProps) => (
 );
 
 const BubbleWrapper = styled.button<{ isOpen?: boolean }>`
-  width: 60px;
-  height: 60px;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: ${(props) => props.theme.bubbleSize};
+  height: ${(props) => props.theme.bubbleSize};
   border: none;
   border-radius: 100%;
   background: ${(props) => props.theme.primary};
   box-shadow: ${(props) => props.theme.bubbleShadow};
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
   animation: view 0.3s ease;
   cursor: pointer;
   transition: 0.1s linear;
@@ -49,8 +49,8 @@ const BubbleWrapper = styled.button<{ isOpen?: boolean }>`
     position: ${(props) => props.isOpen && 'absolute'};
     top: ${(props) => props.isOpen && '10px'};
     right: ${(props) => props.isOpen && '10px'};
-    width: ${(props) => props.isOpen && '40px'};
-    height: ${(props) => props.isOpen && '40px'};
+    width: ${(props) => props.isOpen && props.theme.bubbleOpenMobile};
+    height: ${(props) => props.isOpen && props.theme.bubbleOpenMobile};
     background: ${(props) => props.isOpen && props.theme.mobileCross};
   }
 
@@ -60,26 +60,27 @@ const BubbleWrapper = styled.button<{ isOpen?: boolean }>`
 `;
 
 const BubbleImg = styled.div<{ isOpen?: boolean }>`
-  width: 30px;
-  height: 30px;
-  background: ${(props) => (props.isOpen ? `url(${shut})` : `url(${bubble})`)} no-repeat center;
   position: relative;
+  width: ${(props) => props.theme.bubbleImgSize};
+  height: ${(props) => props.theme.bubbleImgSize};
+  background: ${(props) => (props.isOpen ? `url(${shut})` : `url(${bubble})`)} no-repeat center;
   animation: ${(props) =>
     props.isOpen !== undefined
       ? props.isOpen
         ? 'open-rotate 0.3s linear'
         : 'bubble-open 0.6s forwards, bubbleSecond 0.6s linear forwards 3.2s, bubbleEnd 0.6s linear forwards 5.2s'
       : 'bubble-start 0.6s forwards, bubble-second 0.6s linear forwards 3.3s, bubble-end 0.6s linear forwards 5.2s'};
+
   &:before {
-    z-index: 100;
     content: '';
-    background: url(${check}) no-repeat;
-    width: 20px;
-    height: 20px;
     position: absolute;
     top: 5px;
     left: 5px;
+    z-index: 100;
+    width: 20px;
+    height: 20px;
     opacity: 0;
+    background: url(${check}) no-repeat;
     animation: ${(props) =>
       props.isOpen ? '' : 'text-left-show 1.3s linear 2s, text-right-show 1.3s linear 3.9s, check-show 2s linear 5.8s'};
   }

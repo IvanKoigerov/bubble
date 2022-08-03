@@ -16,8 +16,13 @@ export const mainTheme = {
 
   chatShadow: '0 8px 16px #3333',
   chatColor: '#fff',
+  chatW: '400px',
+  chatH: '760px',
 
   bubbleShadow: '0 0 10px #00000014',
+  bubbleSize: '60px',
+  bubbleOpenMobile: '40px',
+  bubbleImgSize: '30px',
 };
 
 const GlobalStyle = createGlobalStyle`

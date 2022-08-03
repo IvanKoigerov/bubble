@@ -103,8 +103,8 @@ const ChatWrapper = styled.div<{ isOpen?: boolean }>`
   transform: ${(props) => (props.isOpen ? 'translateY(0)' : 'translateY(-30px)')};
 
   @media screen and (min-width: 410px) {
-    width: 400px;
-    height: 760px;
+    width: ${(props) => props.theme.chatW};
+    height: ${(props) => props.theme.chatH};
     max-height: calc(95vh - 100px);
     margin-bottom: 20px;
   }

@@ -48,11 +48,11 @@ const Wrapper = styled.div<{ isUser?: boolean }>`
 `;
 
 const MessageBox = styled.div<{ isUser?: boolean }>`
-  background: ${(props) => (props.isUser ? props.theme.userMessage : props.theme.message)};
-  font-size: 14px;
   display: flex;
   gap: 5px;
   max-width: 80%;
+  background: ${(props) => (props.isUser ? props.theme.userMessage : props.theme.message)};
+  font-size: 14px;
   padding: 10px;
   border-radius: 8px;
   color: ${(props) => props.theme.common};
