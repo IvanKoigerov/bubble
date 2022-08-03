@@ -1,51 +1,60 @@
-import React, { useState } from 'react';
-import Smile from './Smile';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import send from './send.svg';
 import styled from 'styled-components';
 import Message, { MessageProps } from './Message';
 import { format } from 'date-fns';
+import SmileButton from './SmileButton/SmileButton';
 
 interface ChatProps {
   isOpen?: boolean;
 }
 
 const Chat = (props: ChatProps) => {
-  const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = React.useState<string>();
-  const [massageArr, setMassageArr] = useState<MessageProps[]>([]);
-
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState<string>();
+  const [messageArr, setMessageArr] = useState<MessageProps[]>([]);
   const handleMessage = () => {
     if (value) {
-      setMassageArr((currentMassages) => {
-        const newMassage = currentMassages.slice();
-        newMassage.push({
+      setMessageArr((currentMessages) => {
+        const newMessage = currentMessages.slice();
+        newMessage.push({
           time: format(new Date(), 'HH:mm'),
           children: value,
         });
-        return newMassage;
+        return newMessage;
       });
       setValue('');
     }
   };
+  const addSmile = (smile?: string) => {
+    if (smile) {
+      setValue((value) => value + smile);
+    }
+  };
 
-  const textAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const textAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (textAreaRef.current) {
       textAreaRef.current.style.height = '0px';
       textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
     }
   }, [value]);
 
+  useEffect(() => {
+    if (chatRef.current) chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+  }, [messageArr]);
+
   return (
-    <ChatWrapper className={props.isOpen ? 'show' : 'hide'}>
-      <Messeges>
+    <ChatWrapper isOpen={props.isOpen}>
+      <Messages ref={chatRef}>
         <h1>Здравствуйте 👋</h1>
         <p>
-          Если у Вас есть вопрос о порядке оформления документов или получения услуг, вы можете задать его здесь. "Мои
-          Документы" помогут найти нужную информацию.
+          Если у Вас есть вопрос о порядке оформления документов или получения услуг, вы можете задать его здесь.
+          `&quot;`Мои Документы`&quot;` помогут найти нужную информацию.
         </p>
         <Message author="Виртуальный оператор" time="17:05">
           Я не совсем Вас понял. Уточните, пожалуйста, Ваш вопрос. При выборе кнопки Вы можете получить ответ на
@@ -64,32 +73,34 @@ const Chat = (props: ChatProps) => {
         <Message author="Бот" time="17:21">
           Здравствуйте, меня зовут бот. Уточните, пожалуйста, какой вопрос вас интересует?
         </Message>
-        {massageArr &&
-          massageArr.map((massage, key) => (
-            <Message key={key} time={massage.time} isUser={true} children={massage.children} />
+        {messageArr &&
+          messageArr.map((massage, key) => (
+            <Message key={key} time={massage.time} isUser={true}>
+              {massage.children}
+            </Message>
           ))}
-      </Messeges>
+      </Messages>
       <TextWrapper>
-        <Smile fill="#9ea4ac" />
+        <SmileButton addSmile={addSmile} />
         <TextArea ref={textAreaRef} onChange={textAreaChange} placeholder="Введите сообщение..." value={value} />
-        {value && <img src={send} alt="send" onClick={handleMessage} />}
+        {value && <Send type="submit" onClick={handleMessage} />}
       </TextWrapper>
     </ChatWrapper>
   );
 };
 
-const ChatWrapper = styled.div`
-  box-shadow: 0 8px 16px #3333;
+const ChatWrapper = styled.div<{ isOpen?: boolean }>`
+  box-shadow: ${(props) => props.theme.chatShadow};
   border-radius: 4px;
-  border-top: 5px solid #0848c0;
-  background: #fff;
-  padding: 16px;
+  border-top: 5px solid ${(props) => props.theme.primary};
+  background: ${(props) => props.theme.chatColor};
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: 0.5s ease;
-  opacity: 0;
-  transform: translateY(-30px);
+  opacity: ${(props) => (props.isOpen ? '1' : '0')};
+  visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
+  transform: ${(props) => (props.isOpen ? 'translateY(0)' : 'translateY(-30px)')};
 
   @media screen and (min-width: 410px) {
     width: 400px;
@@ -102,40 +113,45 @@ const ChatWrapper = styled.div`
     width: 100%;
     height: 100%;
   }
+`;
 
-  &.show {
+const Send = styled.button`
+  border: none;
+  outline: none;
+  background: url(${send}) no-repeat center;
+  background-size: cover;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+  &:hover {
     opacity: 1;
-    transform: translateY(0);
-  }
-
-  &.hide {
-    visibility: hidden;
-  }
-
-  .item-enter {
-    opacity: 0;
-  }
-  .item-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
   }
 `;
 
 const TextWrapper = styled.form`
-  border: 1px solid #d6dade;
+  position: relative;
+  border: 1px solid ${(props) => props.theme.input};
   border-radius: 2px;
   display: flex;
   align-items: end;
+  margin: 16px;
+  ::placeholder {
+    color: ${(props) => props.theme.common};
+  }
 
-  img,
+  ${Send},
   svg {
     margin: 15px 10px;
     width: 20px;
+    height: 20px;
     flex-shrink: 0;
+    cursor: pointer;
   }
+  svg {
+    fill: ${(props) => props.theme.common};
 
-  svg:hover {
-    fill: #467bf1;
+    &:hover {
+      fill: ${(props) => props.theme.smile};
+    }
   }
 `;
 
@@ -147,15 +163,15 @@ const TextArea = styled.textarea`
   line-height: 1.5;
   border: none;
   outline: none;
-  padding: 15px 0;
+  padding: 14px 0;
 `;
 
-const Messeges = styled.div`
+const Messages = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  padding: 30px 0;
+  padding: 30px 16px;
   gap: 16px;
   margin-top: auto;
 
@@ -172,7 +188,7 @@ const Messeges = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #d6dadd;
+    background-color: ${(props) => props.theme.scroll};
   }
 `;
 
