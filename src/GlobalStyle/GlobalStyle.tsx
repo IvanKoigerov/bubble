@@ -24,6 +24,8 @@ export const mainTheme = {
   bubbleOpenMobile: '40px',
   bubbleImgSize: '30px',
 
+  linkShadow: '0 2px 4px #2C303426',
+
   mediaMobile: '410px',
 };
 

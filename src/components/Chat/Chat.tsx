@@ -76,6 +76,13 @@ const Chat = (props: ChatProps) => {
           Если у Вас есть вопрос о порядке оформления документов или получения услуг, вы можете задать его здесь.
           &quot;Мои Документы&quot; помогут найти нужную информацию.
         </p>
+        <LinkWrapper>
+          <Link>Центры госуслуг «Мои документы»</Link>
+          <Link>Вопросы по Личному кабинету</Link>
+          <Link>Молочная кухня</Link>
+          <Link>Карта Москвича</Link>
+          <Link>🔎 Найти ответ в базе знаний</Link>
+        </LinkWrapper>
         {messageArr &&
           messageArr.map((massage, key) => (
             <Message key={key} time={massage.time} isUser={!massage.author} author={massage.author}>
@@ -177,7 +184,6 @@ const Messages = styled.div`
   padding: 30px 16px 0;
   gap: 16px;
   margin-top: auto;
-
   h1,
   p {
     margin: 0;
@@ -194,6 +200,27 @@ const Messages = styled.div`
   ::-webkit-scrollbar-thumb {
     background-color: ${(props) => props.theme.scroll};
   }
+`;
+
+const Link = styled.a`
+  display: block;
+  border: 1px solid ${(props) => props.theme.input};
+  border-radius: 8px;
+  color: ${(props) => props.theme.primary};
+  box-shadow: ${(props) => props.theme.linkShadow};
+  transition: 0.2s ease;
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const LinkWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 export default Chat;
