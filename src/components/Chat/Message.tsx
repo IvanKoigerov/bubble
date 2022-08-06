@@ -9,7 +9,7 @@ export interface MessageProps {
 }
 
 const Message = (props: MessageProps) => {
-  const massageText = (text: string) => {
+  const messageText = (text: string) => {
     const urlRegex = /(\b(https|http):\/\/[-\w+&@#/%?=~_|!:,.]*[-\w+&@#/%=~_|])/gi;
     return text.replace(urlRegex, function (url) {
       return '<a href="' + url + '">' + url + '</a>';
@@ -20,7 +20,7 @@ const Message = (props: MessageProps) => {
       <MessageBox isUser={props.isUser}>
         <div>
           <span>{props.author}</span>
-          <p dangerouslySetInnerHTML={{ __html: massageText(props.children) }} />
+          <p dangerouslySetInnerHTML={{ __html: messageText(props.children) }} />
         </div>
         <Time>{props.time}</Time>
       </MessageBox>
