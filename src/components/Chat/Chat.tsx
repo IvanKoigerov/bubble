@@ -84,9 +84,9 @@ const Chat = (props: ChatProps) => {
           <Link>🔎 Найти ответ в базе знаний</Link>
         </LinkWrapper>
         {messageArr &&
-          messageArr.map((massage, key) => (
-            <Message key={key} time={massage.time} isUser={!massage.author} author={massage.author}>
-              {massage.children}
+          messageArr.map((message, key) => (
+            <Message key={key} time={message.time} isUser={!message.author} author={message.author}>
+              {message.children}
             </Message>
           ))}
       </Messages>
