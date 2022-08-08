@@ -19,13 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "stylelint \"./src/**/*.{ts,tsx}\"",
-    "build:svg": "svgr --replace-attr-values \"#9ea4ac=currentColor\" --typescript -d src/components/Chat src/components/Chat/smile.svg"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "build:svg": "svgr --typescript -d src/components/Chat src/components/Chat/smile.svg"
   },
   "browserslist": {
     "production": [
