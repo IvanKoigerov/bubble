@@ -14,7 +14,7 @@ function App() {
 }
 
 const AppWrapper = styled.div`
-  background: ${(props) => props.theme.appColor};
+  background: ${(props) => props.theme.colors.app};
   width: 100%;
   min-height: 100vh;
 `;

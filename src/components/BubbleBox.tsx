@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   right: 30px;
   max-height: 95vh;
 
-  @media screen and (max-width: ${(props) => props.theme.mediaMobile}) {
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     bottom: 0;
     right: 0;
     width: 100vw;

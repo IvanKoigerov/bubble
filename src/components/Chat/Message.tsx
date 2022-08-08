@@ -8,13 +8,14 @@ export interface MessageProps {
   time?: string;
 }
 
+const messageText = (text: string) => {
+  const urlRegex = /(\b(https|http):\/\/[-\w+&@#/%?=~_|!:,.]*[-\w+&@#/%=~_|])/gi;
+  return text.replace(urlRegex, function (url) {
+    return '<a href="' + url + '" rel="noreferrer" target="_blank" >' + url + '</a>';
+  });
+};
+
 const Message = (props: MessageProps) => {
-  const messageText = (text: string) => {
-    const urlRegex = /(\b(https|http):\/\/[-\w+&@#/%?=~_|!:,.]*[-\w+&@#/%=~_|])/gi;
-    return text.replace(urlRegex, function (url) {
-      return '<a href="' + url + '">' + url + '</a>';
-    });
-  };
   return (
     <Wrapper isUser={props.isUser}>
       <MessageBox isUser={props.isUser}>
@@ -51,14 +52,21 @@ const MessageBox = styled.div<{ isUser?: boolean }>`
   display: flex;
   gap: 5px;
   max-width: 80%;
-  background: ${(props) => (props.isUser ? props.theme.userMessage : props.theme.message)};
+  background: ${(props) => (props.isUser ? props.theme.colors.userMessage : props.theme.colors.message)};
   font-size: 14px;
   padding: 10px;
   border-radius: 8px;
-  color: ${(props) => props.theme.common};
+  color: ${(props) => props.theme.colors.common};
+  a {
+    color: ${(props) => props.theme.colors.primary};
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
   p {
-    color: ${(props) => props.theme.textColor};
+    color: ${(props) => props.theme.colors.text};
     word-break: break-word;
   }
 `;

@@ -100,10 +100,10 @@ const Chat = (props: ChatProps) => {
 };
 
 const ChatWrapper = styled.div<{ isOpen?: boolean }>`
-  box-shadow: ${(props) => props.theme.chatShadow};
+  box-shadow: ${(props) => props.theme.shadows.chat};
   border-radius: 4px;
-  border-top: 5px solid ${(props) => props.theme.primary};
-  background: ${(props) => props.theme.chatColor};
+  border-top: 5px solid ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.chat};
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -112,14 +112,14 @@ const ChatWrapper = styled.div<{ isOpen?: boolean }>`
   visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
   transform: ${(props) => (props.isOpen ? 'translateY(0)' : 'translateY(-30px)')};
 
-  @media screen and (min-width: ${(props) => props.theme.mediaMobile}) {
-    width: ${(props) => props.theme.chatW};
-    height: ${(props) => props.theme.chatH};
+  @media screen and (min-width: ${(props) => props.theme.breakpoints.mobile}) {
+    width: ${(props) => props.theme.sizes.chatW};
+    height: ${(props) => props.theme.sizes.chatH};
     max-height: calc(95vh - 100px);
     margin-bottom: 20px;
   }
 
-  @media screen and (max-width: ${(props) => props.theme.mediaMobile}) {
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     width: 100%;
     height: 100%;
   }
@@ -139,13 +139,13 @@ const Send = styled.button`
 
 const TextWrapper = styled.form`
   position: relative;
-  border: 1px solid ${(props) => props.theme.input};
+  border: 1px solid ${(props) => props.theme.colors.input};
   border-radius: 2px;
   display: flex;
   align-items: end;
   margin: 16px;
   ::placeholder {
-    color: ${(props) => props.theme.common};
+    color: ${(props) => props.theme.colors.common};
   }
 
   ${Send},
@@ -157,10 +157,10 @@ const TextWrapper = styled.form`
     cursor: pointer;
   }
   svg {
-    fill: ${(props) => props.theme.common};
+    fill: ${(props) => props.theme.colors.common};
 
     &:hover {
-      fill: ${(props) => props.theme.smile};
+      fill: ${(props) => props.theme.colors.smile};
     }
   }
 `;
@@ -198,16 +198,16 @@ const Messages = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: ${(props) => props.theme.scroll};
+    background-color: ${(props) => props.theme.colors.scroll};
   }
 `;
 
 const Link = styled.a`
   display: block;
-  border: 1px solid ${(props) => props.theme.input};
+  border: 1px solid ${(props) => props.theme.colors.input};
   border-radius: 8px;
-  color: ${(props) => props.theme.primary};
-  box-shadow: ${(props) => props.theme.linkShadow};
+  color: ${(props) => props.theme.colors.primary};
+  box-shadow: ${(props) => props.theme.shadows.link};
   transition: 0.2s ease;
   text-align: center;
   padding: 15px;

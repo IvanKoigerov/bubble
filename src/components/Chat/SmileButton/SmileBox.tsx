@@ -24,9 +24,9 @@ const SmileWrapper = styled.div<{ isOpen?: boolean }>`
   position: absolute;
   top: -150px;
   width: 200px;
-  border: 1px solid ${(props) => props.theme.input};
-  background: ${(props) => props.theme.chatColor};
-  box-shadow: ${(props) => props.theme.bubbleShadow};
+  border: 1px solid ${(props) => props.theme.colors.input};
+  background: ${(props) => props.theme.colors.chat};
+  box-shadow: ${(props) => props.theme.shadows.bubble};
   border-radius: 2px;
   font-size: 22px;
   display: grid;
@@ -47,7 +47,7 @@ const SmileButton = styled.span`
   line-height: 1.3;
 
   &:hover {
-    background: ${(props) => props.theme.input};
+    background: ${(props) => props.theme.colors.input};
   }
 `;
 

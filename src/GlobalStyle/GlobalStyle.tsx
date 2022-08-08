@@ -1,32 +1,36 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const mainTheme = {
-  primary: '#0848c0',
-  common: '#9ea4ac',
+  colors: {
+    primary: '#0848c0',
+    common: '#9ea4ac',
 
-  userMessage: '#deecfd',
-  message: '#f3f5f7',
+    userMessage: '#deecfd',
+    message: '#f3f5f7',
 
-  textColor: '#000',
-  appColor: '#282c34',
-  smile: '#467bf1',
-  input: '#d6dade',
-  scroll: '#d6dade',
-  mobileCross: '#3334',
-
-  chatShadow: '0 8px 16px #3333',
-  chatColor: '#fff',
-  chatW: '400px',
-  chatH: '760px',
-
-  bubbleShadow: '0 0 10px #00000014',
-  bubbleSize: '60px',
-  bubbleOpenMobile: '40px',
-  bubbleImgSize: '30px',
-
-  linkShadow: '0 2px 4px #2C303426',
-
-  mediaMobile: '410px',
+    text: '#000',
+    app: '#282c34',
+    smile: '#467bf1',
+    input: '#d6dade',
+    scroll: '#d6dade',
+    mobileCross: '#3334',
+    chat: '#fff',
+  },
+  shadows: {
+    chat: '0 8px 16px #3333',
+    bubble: '0 0 10px #00000014',
+    link: '0 2px 4px #2C303426',
+  },
+  sizes: {
+    chatW: '400px',
+    chatH: '760px',
+    bubble: '60px',
+    bubbleOpenMobile: '40px',
+    bubbleImg: '30px',
+  },
+  breakpoints: {
+    mobile: '410px',
+  },
 };
 
 const GlobalStyle = createGlobalStyle`
